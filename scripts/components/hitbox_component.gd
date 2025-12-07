@@ -1,11 +1,11 @@
 extends Area3D
 class_name HitboxComponent
 
-@export var health_component : HealthComponent
-@export var parent : Node3D
+@export var HEALTH_COMPONENT : HealthComponent
+@export var PARENT : Node3D
 
 
 func damage(attack : Attack):
-	if health_component:
-		health_component.damage(attack)
+	if HEALTH_COMPONENT:
+		HEALTH_COMPONENT.damage(attack)
 	

@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://d378vuqbtmu2a" path="res://scripts/enemy.gd" id="1_mkyue"]
 [ext_resource type="Script" uid="uid://bqgxfle68x2yf" path="res://scripts/states/state_machine.gd" id="3_fpxyv"]
 [ext_resource type="Script" uid="uid://hqnoqlqypuo4" path="res://scripts/states/enemy/e_idle.gd" id="4_lkcdx"]
-[ext_resource type="Script" uid="uid://grb5ndohtlbi" path="res://scripts/states/enemy/eState.gd" id="5_8c00y"]
+[ext_resource type="Script" uid="uid://grb5ndohtlbi" path="res://scripts/states/enemy/e_state.gd" id="5_8c00y"]
 [ext_resource type="Script" uid="uid://dklqxgkl6scss" path="res://scripts/states/enemy/e_pursuit.gd" id="5_t46gg"]
 [ext_resource type="Script" uid="uid://cbytxgc3ophoe" path="res://scripts/components/health_component.gd" id="6_1y3pe"]
 [ext_resource type="Script" uid="uid://bw57iumvcftvi" path="res://scripts/states/enemy/e_attack.gd" id="6_dddk1"]
@@ -26,11 +26,11 @@ radius = 10.0
 height = 0.98877
 radius = 0.518066
 
-[node name="TestEnemy" type="CharacterBody3D" node_paths=PackedStringArray("deathstate")]
+[node name="TestEnemy" type="CharacterBody3D" node_paths=PackedStringArray("DEATH_STATE")]
 collision_layer = 4
 collision_priority = 2.0
 script = ExtResource("1_mkyue")
-deathstate = NodePath("StateMachine/Die")
+DEATH_STATE = NodePath("StateMachine/Die")
 
 [node name="CollisionSphere" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.16983, -0.132381)
@@ -40,45 +40,47 @@ shape = SubResource("CapsuleShape3D_h17bh")
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
 mesh = SubResource("PrismMesh_7ibm0")
 
-[node name="HitboxComponent" type="Area3D" parent="."]
+[node name="HitboxComponent" type="Area3D" parent="." node_paths=PackedStringArray("HEALTH_COMPONENT", "PARENT")]
 collision_layer = 4
 collision_mask = 0
 script = ExtResource("1_h17bh")
+HEALTH_COMPONENT = NodePath("../HealthComponent")
+PARENT = NodePath("..")
 metadata/_custom_type_script = "uid://de7p6bbrswxkf"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HitboxComponent"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00567627, 0)
 shape = SubResource("CylinderShape3D_mkyue")
 
-[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("INITIAL_STATE")]
 script = ExtResource("3_fpxyv")
-initial_state = NodePath("Idle")
+INITIAL_STATE = NodePath("Idle")
 metadata/_custom_type_script = "uid://bqgxfle68x2yf"
 
-[node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("pursue_state")]
+[node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("PURSUE_STATE")]
 script = ExtResource("4_lkcdx")
-pursue_state = NodePath("../Pursuit")
+PURSUE_STATE = NodePath("../Pursuit")
 metadata/_custom_type_script = "uid://grb5ndohtlbi"
 
-[node name="Pursuit" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle_state", "attack_state")]
+[node name="Pursuit" type="Node" parent="StateMachine" node_paths=PackedStringArray("IDLE_STATE", "ATTACK_STATE")]
 script = ExtResource("5_t46gg")
-idle_state = NodePath("../Idle")
-attack_state = NodePath("../Attack")
+IDLE_STATE = NodePath("../Idle")
+ATTACK_STATE = NodePath("../Attack")
+MOVE_SPEED = 7.0
 metadata/_custom_type_script = "uid://grb5ndohtlbi"
 
-[node name="Attack" type="Node" parent="StateMachine" node_paths=PackedStringArray("pursuit_state")]
+[node name="Attack" type="Node" parent="StateMachine" node_paths=PackedStringArray("PURSUIT_STATE")]
 script = ExtResource("6_dddk1")
-pursuit_state = NodePath("../Pursuit")
+PURSUIT_STATE = NodePath("../Pursuit")
 metadata/_custom_type_script = "uid://grb5ndohtlbi"
 
 [node name="Die" type="Node" parent="StateMachine"]
 script = ExtResource("5_8c00y")
 metadata/_custom_type_script = "uid://grb5ndohtlbi"
 
-[node name="HealthComponent" type="Node" parent="." node_paths=PackedStringArray("parent")]
+[node name="HealthComponent" type="Node" parent="." node_paths=PackedStringArray("PARENT")]
 script = ExtResource("6_1y3pe")
-parent = NodePath("..")
-max_health = 5.0
+PARENT = NodePath("..")
 metadata/_custom_type_script = "uid://cbytxgc3ophoe"
 
 [node name="ScanSphere" type="Area3D" parent="."]

@@ -1,4 +1,4 @@
 extends HitboxComponent
 class_name PlayerHitboxComponent
 
-@export var collectable_component : CollectableComponent
+@export var COLLECTABLE_COMPONENT : CollectableComponent

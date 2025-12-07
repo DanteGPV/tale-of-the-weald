@@ -20,11 +20,10 @@ distance_fade_max_distance = 20.0
 
 [node name="Fire" type="StaticBody3D"]
 
-[node name="HitboxComponent" type="Area3D" parent="." node_paths=PackedStringArray("parent")]
+[node name="HitboxComponent" type="Area3D" parent="."]
 collision_layer = 0
 collision_mask = 3
 script = ExtResource("1_xqmqg")
-parent = NodePath("..")
 metadata/_custom_type_script = "uid://de7p6bbrswxkf"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HitboxComponent"]

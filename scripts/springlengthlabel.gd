@@ -1,8 +1,8 @@
 extends Label
 
-@export var parent : Node
-var spring_length : float
+@export var PARENT : Node
+var springLength : float
 
 func _process(_delta):
-	spring_length = parent.spring_arm.spring_length
-	text = "spring length: %s" %spring_length
+	springLength = PARENT.springArm.spring_length
+	text = "spring length: %s" %springLength

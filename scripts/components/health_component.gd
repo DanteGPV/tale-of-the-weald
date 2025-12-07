@@ -1,15 +1,15 @@
 extends Node
 class_name HealthComponent
 
-@export var parent : Node3D
+@export var PARENT : Node3D
 
-@export var max_health : float = 10
+@export var MAX_HEALTH : float = 10
 var health : float
 
 func _ready():
-	health = max_health
+	health = MAX_HEALTH
 
 func damage(attack : Attack):
-	health -= attack.attack_damage
+	health -= attack.ATTACK_DAMAGE
 	if health <= 0:
-		parent.die()
+		PARENT.die()

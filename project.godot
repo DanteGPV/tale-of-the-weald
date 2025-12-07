@@ -12,7 +12,7 @@ config_version=5
 
 config/name="Tale Of The Weald"
 run/main_scene="uid://dv1ux58568xdm"
-config/features=PackedStringArray("4.4", "Forward Plus")
+config/features=PackedStringArray("4.5", "Forward Plus")
 boot_splash/bg_color=Color(0.239336, 0.22549, 0.380788, 1)
 boot_splash/image="res://assets/bootsplash.png"
 config/icon="res://icon.svg"

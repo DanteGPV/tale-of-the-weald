@@ -1,10 +1,12 @@
-[gd_scene load_steps=33 format=4 uid="uid://c5xblrrwat1e4"]
+[gd_scene load_steps=35 format=4 uid="uid://c5xblrrwat1e4"]
 
 [ext_resource type="PackedScene" uid="uid://cfmgsgc4u1jw2" path="res://scenes/player_character.tscn" id="1_j8ivh"]
 [ext_resource type="PackedScene" uid="uid://cmyh1p4gtykjt" path="res://scenes/fire.tscn" id="1_rnaij"]
 [ext_resource type="Script" uid="uid://nkrwr7uqj21t" path="res://scripts/state_label.gd" id="2_7ddre"]
 [ext_resource type="Texture2D" uid="uid://daexxcuj361l8" path="res://addons/kenney_prototype_textures/orange/texture_01.png" id="2_nd71p"]
+[ext_resource type="PackedScene" uid="uid://og2e4fcjx17l" path="res://scenes/dialogue.tscn" id="2_nks25"]
 [ext_resource type="Script" uid="uid://dghq27ecpj7qa" path="res://scripts/springlengthlabel.gd" id="2_qjeyg"]
+[ext_resource type="PackedScene" uid="uid://dafpgh0xkwwt8" path="res://scenes/dialogue_component.tscn" id="3_kub5s"]
 [ext_resource type="Script" uid="uid://d2jtsclf26s41" path="res://scripts/health_label.gd" id="3_wtsjf"]
 [ext_resource type="Texture2D" uid="uid://dwu2g0d5fuj6b" path="res://addons/kenney_prototype_textures/orange/texture_09.png" id="4_3qnke"]
 [ext_resource type="Script" uid="uid://ci4ruud3i4r52" path="res://scripts/collectables_label.gd" id="6_gah1j"]
@@ -84,16 +86,22 @@ uv1_scale = Vector3(5, 5, 5)
 [sub_resource type="BoxShape3D" id="BoxShape3D_3qnke"]
 size = Vector3(20, 1, 130)
 
-[node name="main" type="Node3D"]
+[node name="Main" type="Node3D"]
 
 [node name="Fire" parent="." instance=ExtResource("1_rnaij")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.51519, 1.13406, -12.9143)
 
-[node name="playerCharacter" parent="." instance=ExtResource("1_j8ivh")]
+[node name="Dialogue Component" parent="Fire" instance=ExtResource("3_kub5s")]
+RANGE = 10.0
+DIALOGUE_START_ID = "404"
+
+[node name="Dialogue" parent="Fire/Dialogue Component" instance=ExtResource("2_nks25")]
+
+[node name="PlayerCharacter" parent="." instance=ExtResource("1_j8ivh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 collision_layer = 3
 
-[node name="springlengthlabel" type="Label" parent="playerCharacter" node_paths=PackedStringArray("parent")]
+[node name="Springlengthlabel" type="Label" parent="PlayerCharacter" node_paths=PackedStringArray("PARENT")]
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
@@ -104,9 +112,9 @@ offset_bottom = -435.0
 grow_vertical = 2
 size_flags_horizontal = 4
 script = ExtResource("2_qjeyg")
-parent = NodePath("..")
+PARENT = NodePath("..")
 
-[node name="healthLabel" type="Label" parent="playerCharacter" node_paths=PackedStringArray("parent")]
+[node name="HealthLabel" type="Label" parent="PlayerCharacter" node_paths=PackedStringArray("PARENT")]
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
@@ -117,21 +125,21 @@ offset_bottom = -380.0
 grow_vertical = 2
 size_flags_horizontal = 4
 script = ExtResource("3_wtsjf")
-parent = NodePath("..")
+PARENT = NodePath("..")
 
-[node name="stateLabel" type="Label" parent="playerCharacter" node_paths=PackedStringArray("parent")]
+[node name="StateLabel" type="Label" parent="PlayerCharacter" node_paths=PackedStringArray("PARENT")]
 offset_left = -1.0
 offset_right = 209.0
 offset_bottom = 45.0
 script = ExtResource("2_7ddre")
-parent = NodePath("..")
+PARENT = NodePath("..")
 
-[node name="collectablesLabel" type="Label" parent="playerCharacter" node_paths=PackedStringArray("parent")]
+[node name="CollectablesLabel" type="Label" parent="PlayerCharacter" node_paths=PackedStringArray("PARENT")]
 offset_top = 168.0
 offset_right = 1.0
 offset_bottom = 191.0
 script = ExtResource("6_gah1j")
-parent = NodePath("..")
+PARENT = NodePath("..")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.99906, -0.0146376, 0.0407937, 8.74681e-09, 0.941241, 0.337736, -0.0433404, -0.337419, 0.940356, -3.60479, 8.47846, 17.9519)
@@ -163,70 +171,74 @@ environment = SubResource("Environment_nlwlv")
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 navigation_mesh = SubResource("NavigationMesh_nlwlv")
 
-[node name="platformtest" type="Node3D" parent="NavigationRegion3D"]
+[node name="Platformtest" type="Node3D" parent="NavigationRegion3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38.4381, 0.766923, -27.4796)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/platformtest"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/Platformtest"]
 mesh = SubResource("ArrayMesh_qq5q4")
 skeleton = NodePath("../../..")
 surface_material_override/0 = ExtResource("8_qq5q4")
 
-[node name="PlyEditor" type="Node" parent="NavigationRegion3D/platformtest/MeshInstance3D"]
+[node name="PlyEditor" type="Node" parent="NavigationRegion3D/Platformtest/MeshInstance3D"]
 script = ExtResource("9_gah1j")
 ply_mesh = SubResource("Resource_gah1j")
 materials = Array[Material]([ExtResource("8_qq5q4"), ExtResource("11_nlwlv"), ExtResource("12_6gkjt"), ExtResource("13_lmrlb"), ExtResource("14_nks25"), ExtResource("15_kub5s"), ExtResource("16_afgys"), ExtResource("17_sstcd"), ExtResource("18_2oq4n")])
 metadata/_custom_type_script = "uid://b5c7xx2kg7a2"
 
-[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/platformtest/MeshInstance3D"]
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/Platformtest/MeshInstance3D"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/platformtest/MeshInstance3D/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Platformtest/MeshInstance3D/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_qq5q4")
 
-[node name="testgrounds" type="Node3D" parent="NavigationRegion3D"]
+[node name="Testgrounds" type="Node3D" parent="NavigationRegion3D"]
 
-[node name="floor" type="StaticBody3D" parent="NavigationRegion3D/testgrounds"]
+[node name="Floor" type="StaticBody3D" parent="NavigationRegion3D/Testgrounds"]
 collision_mask = 7
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/testgrounds/floor"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/Testgrounds/Floor"]
 transform = Transform3D(64, 0, 0, 0, 20, 0, 0, 0, 64, 0, 0, 0)
 material_override = SubResource("StandardMaterial3D_wtsjf")
 mesh = SubResource("PlaneMesh_0wfyh")
 surface_material_override/0 = SubResource("StandardMaterial3D_sugp2")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/testgrounds/floor"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Testgrounds/Floor"]
 transform = Transform3D(128, 0, 0, 0, 128, 0, 0, 0, 128, 0, 0, 0)
 shape = SubResource("HeightMapShape3D_0wfyh")
 
-[node name="boundaries" type="Node3D" parent="NavigationRegion3D/testgrounds"]
+[node name="Boundaries" type="Node3D" parent="NavigationRegion3D/Testgrounds"]
 
-[node name="wall" type="StaticBody3D" parent="NavigationRegion3D/testgrounds/boundaries"]
+[node name="wall" type="StaticBody3D" parent="NavigationRegion3D/Testgrounds/Boundaries"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -62, 9, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/testgrounds/boundaries/wall"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Testgrounds/Boundaries/wall"]
 transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
 shape = SubResource("BoxShape3D_3qnke")
 
-[node name="wall2" type="StaticBody3D" parent="NavigationRegion3D/testgrounds/boundaries"]
+[node name="wall2" type="StaticBody3D" parent="NavigationRegion3D/Testgrounds/Boundaries"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 63, 9, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/testgrounds/boundaries/wall2"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Testgrounds/Boundaries/wall2"]
 transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
 shape = SubResource("BoxShape3D_3qnke")
 
-[node name="wall3" type="StaticBody3D" parent="NavigationRegion3D/testgrounds/boundaries"]
+[node name="wall3" type="StaticBody3D" parent="NavigationRegion3D/Testgrounds/Boundaries"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 1, 9, -63)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/testgrounds/boundaries/wall3"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Testgrounds/Boundaries/wall3"]
 transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
 shape = SubResource("BoxShape3D_3qnke")
 
-[node name="wall4" type="StaticBody3D" parent="NavigationRegion3D/testgrounds/boundaries"]
+[node name="wall4" type="StaticBody3D" parent="NavigationRegion3D/Testgrounds/Boundaries"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 1, 9, 61)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/testgrounds/boundaries/wall4"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Testgrounds/Boundaries/wall4"]
 transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
 shape = SubResource("BoxShape3D_3qnke")
 
 [node name="TestEnemy" parent="." instance=ExtResource("22_6gkjt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.7262, 3.35067, 24.1016)
-player_path = NodePath("../playerCharacter")
+PLAYER_PATH = NodePath("../PlayerCharacter")
+
+[node name="TestEnemy2" parent="." instance=ExtResource("22_6gkjt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.7262, 3.35067, 14.913277)
+PLAYER_PATH = NodePath("../PlayerCharacter")

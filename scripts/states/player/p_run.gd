@@ -1,8 +1,8 @@
 extends pState
 
 ##Diccionario de estados
-@export var idle_state : pState
-@export var fall_state : pState
+@export var IDLE_STATE : pState
+@export var FALL_STATE: pState
 
 ##Referencia al SpringArm3D
 @export var spring_arm : SpringArm3D
@@ -12,18 +12,18 @@ func _enter():
 
 func process_physics(delta) -> pState:
 	
-	parent.velocity.y -= gravity*delta ##Gravedad
+	parent.velocity.y -= GRAVITY*delta ##Gravedad
 	
-	InputMove(delta, spring_arm)
+	input_move(delta, spring_arm)
 	
 	if !parent.is_on_floor():
-		return fall_state
+		return FALL_STATE
 	
 	if !Input.is_anything_pressed():
-		parent.velocity = Vector3(move_toward(parent.velocity.x,0,slide),parent.velocity.y,move_toward(parent.velocity.z,0,slide))
+		parent.velocity = Vector3(move_toward(parent.velocity.x,0,SLIDE),parent.velocity.y,move_toward(parent.velocity.z,0,SLIDE))
 	parent.move_and_slide()
 	if parent.velocity == Vector3(0,0,0) and !Input.is_anything_pressed():
-		return idle_state
+		return IDLE_STATE
 	if (parent.velocity.x < 1 && parent.velocity.x > -1) && (parent.velocity.z < 1 && parent.velocity.z > -1):
 		parent.animations.play("idle")
 	else:
@@ -31,9 +31,9 @@ func process_physics(delta) -> pState:
 	return null
 
 func process_frame(_delta):
-	flipSprite()
+	flip_sprite()
 
 func process_input(_event):
 	if Input.is_action_just_pressed("jump"):
-		parent.velocity.y = jump_speed
-		return fall_state
+		parent.velocity.y = JUMP_SPEED
+		return FALL_STATE

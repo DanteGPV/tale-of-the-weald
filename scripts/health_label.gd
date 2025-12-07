@@ -1,7 +1,7 @@
 extends Label
 
-@export var parent : Player
+@export var PARENT : Player
 @onready var healthComponent : HealthComponent 
 
 func _process(_delta):
-	text = "%s" %parent.healthComponent.health + "/%s" %parent.healthComponent.max_health 
+	text = "%s" %PARENT.healthComponent.health + "/%s" %PARENT.healthComponent.MAX_HEALTH 

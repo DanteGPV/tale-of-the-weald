@@ -1,0 +1,32 @@
+  {
+	"0": {
+	  "character": "Narrator",
+	  "text": "Wake up, sporeling.",
+	  "go to": [
+		"1",
+		"2"
+	  ],
+	  "options ": [
+		"Who am I?",
+        "Where am I?"
+	  ]
+	},
+	"1": {
+	  "character": "Narrator",
+	  "text": "You are a sporeling. New life. Brought up to aid in a matter most important."
+	},
+	"2": {
+	  "character": "Narrator",
+	  "text": "You are inside the cave of birth. Make your way forward and emerge into the world."
+	},
+	"404": {
+	  "character": "Name_test",
+	  "text": "This is a dialogue test. Press SPACE to continue.",
+	  "go to": "405"
+	},
+	"405": {
+	  "character": "Name_test",
+	  "text": "Test over.",
+	  "function": "end_dialogue"
+	}
+  }
