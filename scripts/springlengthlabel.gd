@@ -4,5 +4,5 @@ extends Label
 var springLength : float
 
 func _process(_delta):
-	springLength = PARENT.springArm.spring_length
+	springLength = PARENT.springPivot.springArm.spring_length
 	text = "spring length: %s" %springLength

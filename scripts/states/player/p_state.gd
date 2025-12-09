@@ -16,9 +16,9 @@ var parent : Player
 func _enter():
 	parent.animations.play(ANIMATION_NAME)
 
-func input_move(delta, spring_arm : SpringArm3D):
+func input_move(delta):
 	var input = Input.get_vector("moveleft","moveright","moveforward","moveback")
-	var direction = Vector3(input.x,0,input.y).rotated(Vector3.UP, spring_arm.rotation.y)
+	var direction = Vector3(input.x,0,input.y).rotated(Vector3.UP, parent.springPivot.rotation.y)
 	parent.velocity = lerp(parent.velocity, direction * MOVE_SPEED, SLIDE * delta)
 
 func flip_sprite():

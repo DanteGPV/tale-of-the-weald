@@ -19,7 +19,7 @@ func process_physics(delta):
 		parent.animations.play("fall")
 		parent.velocity.y -= GRAVITY *2 * delta
 	
-	input_move(delta, spring_arm)
+	input_move(delta)
 	
 	parent.move_and_slide()
 	

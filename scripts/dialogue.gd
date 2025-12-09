@@ -23,7 +23,7 @@ func play_from(startID):
 		player.set_active(false)
 
 func _input(event):
-	if Input.is_action_just_pressed("jump") and isDialogueActive and $DialogueCooldownTimer.is_stopped():
+	if Input.is_action_just_pressed("game_interact") and isDialogueActive and $DialogueCooldownTimer.is_stopped():
 		advance_dialogue()
 	return
 

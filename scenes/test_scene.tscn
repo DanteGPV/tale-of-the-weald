@@ -236,9 +236,9 @@ transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 
 shape = SubResource("BoxShape3D_3qnke")
 
 [node name="TestEnemy" parent="." instance=ExtResource("22_6gkjt")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.7262, 3.35067, 24.1016)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.8947554, 3.35067, 42.1532)
 PLAYER_PATH = NodePath("../PlayerCharacter")
 
 [node name="TestEnemy2" parent="." instance=ExtResource("22_6gkjt")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.7262, 3.35067, 14.913277)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.102721214, 3.350671, 40.022316)
 PLAYER_PATH = NodePath("../PlayerCharacter")

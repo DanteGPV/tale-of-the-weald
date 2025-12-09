@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://cfmgsgc4u1jw2"]
+[gd_scene load_steps=32 format=3 uid="uid://cfmgsgc4u1jw2"]
 
 [ext_resource type="Script" uid="uid://dn2xyye3lsd5a" path="res://scripts/player.gd" id="1_56udc"]
 [ext_resource type="Texture2D" uid="uid://c378r060garon" path="res://assets/player/sp_fall/sp_fall.png" id="2_d7btg"]
@@ -25,8 +25,7 @@
 [ext_resource type="Texture2D" uid="uid://cwik3aephgg34" path="res://assets/player/sp_run/run_0004.png" id="15_pkxds"]
 [ext_resource type="Texture2D" uid="uid://cmw0roy8kohjp" path="res://assets/player/sp_run/run_0005.png" id="16_b8kkg"]
 [ext_resource type="Texture2D" uid="uid://l5kvbtin3fjq" path="res://assets/player/sp_run/run_0006.png" id="17_6rdx2"]
-[ext_resource type="Script" uid="uid://deoc8bq51pmnd" path="res://scripts/camera_controls.gd" id="19_nos2o"]
-[ext_resource type="Script" uid="uid://bd1wjng35sdff" path="res://scenes/camera_follow.gd" id="20_66bo7"]
+[ext_resource type="Script" uid="uid://deoc8bq51pmnd" path="res://camera_3d.gd" id="19_nos2o"]
 [ext_resource type="Script" uid="uid://dtmbguol6uyqt" path="res://scripts/components/player_hitbox_component.gd" id="24_bxieb"]
 [ext_resource type="Script" uid="uid://bsluy0jer8fnu" path="res://scripts/components/collectable_component.gd" id="27_bxieb"]
 
@@ -108,8 +107,6 @@ animations = [{
 "speed": 12.0
 }]
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_66bo7"]
-
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_joi77"]
 height = 1.42044
 radius = 0.463379
@@ -134,25 +131,15 @@ render_priority = 1
 sprite_frames = SubResource("SpriteFrames_xc70a")
 animation = &"fall"
 
-[node name="SpringArmPivot" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.8660254, 0.5, 0, -0.5, 0.8660254, 0, 0, 0)
-script = ExtResource("19_nos2o")
-minVerticalAngle = -0.5235987755982988
-maxVerticalAngle = 0.0
-
-[node name="Camera3D" type="Camera3D" parent="SpringArmPivot" node_paths=PackedStringArray("SPRING_ARM")]
-transform = Transform3D(1, 0, 0, 0, 1, -2.9802322e-08, 0, 2.9802322e-08, 1, 0, 0.100429535, 5.876098)
-script = ExtResource("20_66bo7")
-SPRING_ARM = NodePath("../SpringArm3D/SpringPosition")
-LERP_POWER = 10.0
-
-[node name="SpringArm3D" type="SpringArm3D" parent="SpringArmPivot"]
-transform = Transform3D(1, 0, 0, 0, 0.9999996, 0, 0, 0, 0.9999996, 0, 0, 0)
-collision_mask = 9
-shape = SubResource("SphereShape3D_66bo7")
+[node name="SpringArm3D" type="SpringArm3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 0, 0)
+collision_mask = 8
 spring_length = 6.0
 
-[node name="SpringPosition" type="Node3D" parent="SpringArmPivot/SpringArm3D"]
+[node name="Camera3D" type="Camera3D" parent="SpringArm3D" node_paths=PackedStringArray("PLAYER")]
+transform = Transform3D(1, 0, 0, 0, 1.0000005, 2.9802322e-08, 0, -2.9802322e-08, 1.0000005, 0, 0.1004293, 5.876101)
+script = ExtResource("19_nos2o")
+PLAYER = NodePath("../..")
 
 [node name="pStateMachine" type="Node" parent="." node_paths=PackedStringArray("INITIAL_STATE")]
 script = ExtResource("5_s7f3b")
@@ -169,7 +156,7 @@ metadata/_custom_type_script = "uid://bbk7hmc17x0uu"
 script = ExtResource("7_pxja8")
 IDLE_STATE = NodePath("../pIdle")
 FALL_STATE = NodePath("../pJump")
-spring_arm = NodePath("../../SpringArmPivot/SpringArm3D")
+spring_arm = NodePath("../../SpringArm3D")
 ANIMATION_NAME = "run"
 metadata/_custom_type_script = "uid://bbk7hmc17x0uu"
 
@@ -177,7 +164,7 @@ metadata/_custom_type_script = "uid://bbk7hmc17x0uu"
 script = ExtResource("8_pxja8")
 IDLE_STATE = NodePath("../pIdle")
 RUN_STATE = NodePath("../pRun")
-spring_arm = NodePath("../../SpringArmPivot/SpringArm3D")
+spring_arm = NodePath("../../SpringArm3D")
 ANIMATION_NAME = "jump"
 metadata/_custom_type_script = "uid://bbk7hmc17x0uu"
 

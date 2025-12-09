@@ -13,7 +13,7 @@ func _ready():
 	enterDialogueRange.shape.radius = RANGE
 
 func _input(event):
-	if Input.is_action_just_pressed("jump") and playerIsInDialogueRange:
+	if Input.is_action_just_pressed("game_interact") and playerIsInDialogueRange:
 		find_and_play_dialogue()
 
 func _on_enter_dialogue_range_body_entered(body):

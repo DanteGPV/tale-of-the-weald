@@ -14,7 +14,7 @@ func process_physics(delta) -> pState:
 	
 	parent.velocity.y -= GRAVITY*delta ##Gravedad
 	
-	input_move(delta, spring_arm)
+	input_move(delta)
 	
 	if !parent.is_on_floor():
 		return FALL_STATE
