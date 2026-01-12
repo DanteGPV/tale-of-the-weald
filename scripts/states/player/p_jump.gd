@@ -8,6 +8,7 @@ extends pState
 @export var spring_arm : SpringArm3D
 
 func _enter():
+	parent.apply_squash_and_stretch(Vector3(0.9, 1.3, 0.8),0.4,0.2) #Squash de salto
 	super()
 
 func process_physics(delta):

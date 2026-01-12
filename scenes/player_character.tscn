@@ -33,7 +33,7 @@
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_uj7mf"]
 radius = 0.50769
-height = 1.68163
+height = 1.2050729
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_xc70a"]
 animations = [{
@@ -123,7 +123,7 @@ script = ExtResource("1_56udc")
 DEATH_STATE = NodePath("pStateMachine/pDie")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0334647, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.990367, 0)
 shape = SubResource("CapsuleShape3D_uj7mf")
 
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
@@ -131,6 +131,7 @@ transform = Transform3D(-0.393728, 0, 0, 0, -0.393728, 0, 0, 0, 0.31716675, 0, 0
 layers = 2
 cast_shadow = 0
 gi_mode = 2
+offset = Vector2(0, 323.28)
 billboard = 2
 alpha_cut = 2
 texture_filter = 2
@@ -139,7 +140,7 @@ sprite_frames = SubResource("SpriteFrames_xc70a")
 animation = &"idle"
 
 [node name="ShadowRay" type="ShapeCast3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.235, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0353857, 0)
 shape = SubResource("BoxShape3D_0n276")
 target_position = Vector3(0.07, -20, 0)
 collide_with_areas = true
@@ -152,7 +153,7 @@ normal_fade = 0.4
 cull_mask = 1048573
 
 [node name="SpringArmPivot" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.8660254, 0.5, 0, -0.5, 0.8660254, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 0.8660254, 0.5, 0, -0.5, 0.8660254, 0, 0.9949967, 0)
 script = ExtResource("19_nos2o")
 minVerticalAngle = -0.5235987755982988
 maxVerticalAngle = 0.0
@@ -203,6 +204,7 @@ script = ExtResource("5_iadup")
 metadata/_custom_type_script = "uid://bbk7hmc17x0uu"
 
 [node name="HitboxComponent" type="Area3D" parent="." node_paths=PackedStringArray("COLLECTABLE_COMPONENT", "HEALTH_COMPONENT", "PARENT")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9949969, 0)
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("24_bxieb")
