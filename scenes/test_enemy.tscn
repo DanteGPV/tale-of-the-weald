@@ -1,7 +1,7 @@
 [gd_scene load_steps=14 format=3 uid="uid://dfh5r553kua0a"]
 
 [ext_resource type="Script" uid="uid://de7p6bbrswxkf" path="res://scripts/components/hitbox_component.gd" id="1_h17bh"]
-[ext_resource type="Script" uid="uid://d378vuqbtmu2a" path="res://scripts/enemy.gd" id="1_mkyue"]
+[ext_resource type="Script" uid="uid://co4qrgpv3tovi" path="res://scripts/test_enemy.gd" id="1_t46gg"]
 [ext_resource type="Script" uid="uid://bqgxfle68x2yf" path="res://scripts/states/state_machine.gd" id="3_fpxyv"]
 [ext_resource type="Script" uid="uid://hqnoqlqypuo4" path="res://scripts/states/enemy/e_idle.gd" id="4_lkcdx"]
 [ext_resource type="Script" uid="uid://grb5ndohtlbi" path="res://scripts/states/enemy/e_state.gd" id="5_8c00y"]
@@ -29,7 +29,7 @@ radius = 0.518066
 [node name="TestEnemy" type="CharacterBody3D" node_paths=PackedStringArray("DEATH_STATE")]
 collision_layer = 4
 collision_priority = 2.0
-script = ExtResource("1_mkyue")
+script = ExtResource("1_t46gg")
 DEATH_STATE = NodePath("StateMachine/Die")
 
 [node name="CollisionSphere" type="CollisionShape3D" parent="."]
